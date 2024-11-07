@@ -59,9 +59,49 @@ function getHumanChoice() {
 
 }
 
+// Game logic for a round of "Rock, Paper, Scissors"
+
+function playRound(humanChoice, computerChoice) {
+
+  // Object that stores which choice beats which
+
+  const getsBeatenBy = {
+    paper: "Scissors",
+    scissors: "Rock",
+    rock: "Paper"
+  }
+
+  // Checks ties
+
+  if (humanChoice === computerChoice) {
+    console.log("Tie");
+  }
+
+  // Checks human win
+
+  else if (getsBeatenBy[computerChoice.toLowerCase()] === humanChoice) {
+    console.log("Round won!")
+    humanScore++;
+  }
+
+  // Gives point to computer
+
+  else {
+    console.log("Round lost")
+    computerScore++
+  }
+
+  // Prints current results and ends the round
+
+  console.log(`You [${humanScore}] - Computer [${computerScore}]`);
+
+}
+
 // Score tracker
 
 let humanScore = 0;
 let computerScore = 0;
 
-getHumanChoice();
+// Plays a round of Rock, Paper, Scissors
+
+playRound( getHumanChoice(), getComputerChoice() )
