@@ -207,9 +207,15 @@ function gameWrapper() {
   }
 }
 
+// Prompt to open the console
+
+window.alert("Please open Google Chrome, press F12 and keep your Console open for the intended experience.");
+
 // Score tracker
 
 let humanScore = 0;
 let computerScore = 0;
+
+// Executes the code
 
 gameWrapper();
