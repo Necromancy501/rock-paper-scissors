@@ -9,23 +9,19 @@ function capitalize(word) {
 
 // Checks if an input is a valid number (disalow 0). Used in roundsNumber
 
-function isRoundNumber(str){
-
+function isRoundNumber(str) {
   // Eliminates surrounding whitespaces
 
   str = str.trim();
 
   // If empty string return false
 
-  if (!str){
+  if (!str) {
     return false;
-  }
-  
-  else {
-
+  } else {
     // Trims leading zeros
 
-    str = str.replace(/^0+/, '');
+    str = str.replace(/^0+/, "");
 
     // Forces an integer and stores in number
 
@@ -33,15 +29,12 @@ function isRoundNumber(str){
 
     // Returns number if it's greater than 0, not a string and not infinity. Otherwise returns false
 
-    if ((number !== Infinity) && (String(number) === str) && (number>0)){
-      return number
-    }
-    else {
+    if (number !== Infinity && String(number) === str && number > 0) {
+      return number;
+    } else {
       return false;
     }
-
   }
-
 }
 
 // MAIN FUNCTIONS
@@ -49,7 +42,6 @@ function isRoundNumber(str){
 // Returns "rock", "paper" or "scissors" randomly (CPU choice)
 
 function getComputerChoice() {
-
   // List all the options available with a random value
 
   const options = {
@@ -70,11 +62,9 @@ function getComputerChoice() {
 // Gets and returns human choice for Rock, Paper, Scissors
 
 function getHumanChoice() {
-
   keepGoing = true;
 
-  while(keepGoing){
-
+  while (keepGoing) {
     // Array with all the possible choices.
 
     const options = ["Rock", "Paper", "Scissors"];
@@ -90,27 +80,22 @@ function getHumanChoice() {
     }
 
     // Otherwise asks again for a valid choice
-
     else {
       console.log("please enter a valid choice");
     }
   }
-
-
-
 }
 
 // Game logic for a round of "Rock, Paper, Scissors"
 
 function playRound(username, humanChoice, computerChoice) {
-
   // Object that stores which choice beats which
 
   const getsBeatenBy = {
     paper: "Scissors",
     scissors: "Rock",
-    rock: "Paper"
-  }
+    rock: "Paper",
+  };
 
   let isRoundPlayed;
 
@@ -122,18 +107,16 @@ function playRound(username, humanChoice, computerChoice) {
   }
 
   // Checks human win
-
   else if (getsBeatenBy[computerChoice.toLowerCase()] === humanChoice) {
-    console.log("Round won!")
+    console.log("Round won!");
     humanScore++;
     isRoundPlayed = true;
   }
 
   // Gives point to computer
-
   else {
-    console.log("Round lost")
-    computerScore++
+    console.log("Round lost");
+    computerScore++;
     isRoundPlayed = true;
   }
 
@@ -142,61 +125,51 @@ function playRound(username, humanChoice, computerChoice) {
   console.log(`${username} [${humanScore}] - Computer [${computerScore}]`);
 
   return isRoundPlayed;
-
 }
 
 // Gets number of rounds from user
 
-function roundsNumber(){
-
+function roundsNumber() {
   // Gets number of rounds from user
 
-  let rounds = prompt("How many rounds would you like to play?")
+  let rounds = prompt("How many rounds would you like to play?");
 
   keepGoing = true;
-  
-  while(keepGoing){
 
+  while (keepGoing) {
     // Checks and assigns rounds number to a valid format
 
     rounds = isRoundNumber(rounds);
 
-    if(rounds){
-
+    if (rounds) {
       // Returns the number if it's a valid number
 
       return rounds;
-
     }
 
     // Repeats the prompt if necessary
-    
-    console.log("Invalid number of rounds")
+
+    console.log("Invalid number of rounds");
     rounds = prompt("Please enter a valid number of rounds");
   }
-
 }
 
 // Gets the winner for a full game of "Rock, Paper, Scissors"
 
-function getsWinner(player1, pointsP1, player2, pointsP2){
-
+function getsWinner(player1, pointsP1, player2, pointsP2) {
   // Checks tie, returns "tie"
 
-  if (pointsP1 === pointsP2){
-    return("tie");
+  if (pointsP1 === pointsP2) {
+    return "tie";
   }
 
   // Returns winner
-
   else {
-    return (pointsP1 > pointsP2) ? player1 : player2;
+    return pointsP1 > pointsP2 ? player1 : player2;
   }
-
 }
 
-function gameWrapper(){
-
+function gameWrapper() {
   // Asks for username
 
   const username = prompt("Please enter your username");
@@ -207,14 +180,12 @@ function gameWrapper(){
 
   // Plays for a determined number of rounds
 
-  while(numberOfRounds){
-
+  while (numberOfRounds) {
     // Plays a round of Rock, Paper, Scissors
 
-    if(playRound(username, getHumanChoice(), getComputerChoice())){
-      
+    if (playRound(username, getHumanChoice(), getComputerChoice())) {
       // Decrease the number of rounds remaining
-    
+
       numberOfRounds--;
     }
 
@@ -229,13 +200,11 @@ function gameWrapper(){
 
   console.log("GAME OVER");
 
-  if(winner==="tie"){
+  if (winner === "tie") {
     console.log("Game concluded in a tie");
-  }
-  else {
+  } else {
     console.log(`Winner: ${winner}`);
   }
-
 }
 
 // Score tracker
