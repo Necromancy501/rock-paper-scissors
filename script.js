@@ -1,6 +1,6 @@
 // AUXILIAR FUNCTIONS
 
-// Capitalizes a word. Used in "getHumanChoice()"
+// Capitalizes a word
 
 function capitalize(word) {
   word = word.toLowerCase();
@@ -59,36 +59,10 @@ function getComputerChoice() {
   return capitalize(computerChoice);
 }
 
-// Gets and returns human choice for Rock, Paper, Scissors
-
-function getHumanChoice() {
-  keepGoing = true;
-
-  while (keepGoing) {
-    // Array with all the possible choices.
-
-    const options = ["Rock", "Paper", "Scissors"];
-
-    // Asks the user to input a choice: "Rock, Paper or Scissors?"
-
-    const choice = capitalize(prompt("Rock, Paper or Scissors?"));
-
-    // Checks if it's a valid choice and returns that choice.
-
-    if (options.includes(choice)) {
-      return choice;
-    }
-
-    // Otherwise asks again for a valid choice
-    else {
-      console.log("please enter a valid choice");
-    }
-  }
-}
-
 // Game logic for a round of "Rock, Paper, Scissors"
 
 function playRound(username, humanChoice, computerChoice) {
+  
   // Object that stores which choice beats which
 
   const getsBeatenBy = {
@@ -97,32 +71,32 @@ function playRound(username, humanChoice, computerChoice) {
     rock: "Paper",
   };
 
+
   let isRoundPlayed;
 
   // Checks ties
 
   if (humanChoice === computerChoice) {
-    console.log("Tie");
+    resultsDisplayer.textContent = "Tie";
     isRoundPlayed = false;
   }
 
   // Checks human win
   else if (getsBeatenBy[computerChoice.toLowerCase()] === humanChoice) {
-    console.log("Round won!");
+    resultsDisplayer.textContent = "Round Won!";
     humanScore++;
     isRoundPlayed = true;
   }
 
   // Gives point to computer
   else {
-    console.log("Round lost");
+    resultsDisplayer.textContent = "Round Lost";
     computerScore++;
     isRoundPlayed = true;
   }
 
   // Prints current results
-
-  console.log(`${username} [${humanScore}] - Computer [${computerScore}]`);
+  scoreDisplayer.textContent = `${username} [${humanScore}] - Computer [${computerScore}]`;
 
   return isRoundPlayed;
 }
@@ -169,6 +143,8 @@ function getsWinner(player1, pointsP1, player2, pointsP2) {
   }
 }
 
+// Wraps the whole game
+
 function gameWrapper() {
   // Asks for username
 
@@ -183,7 +159,7 @@ function gameWrapper() {
   while (numberOfRounds) {
     // Plays a round of Rock, Paper, Scissors
 
-    if (playRound(username, getHumanChoice(), getComputerChoice())) {
+    if (playRound(username, humanChoice, getComputerChoice())) {
       // Decrease the number of rounds remaining
 
       numberOfRounds--;
@@ -198,24 +174,49 @@ function gameWrapper() {
 
   // Final output messages
 
-  console.log("GAME OVER");
-
-  if (winner === "tie") {
-    console.log("Game concluded in a tie");
-  } else {
-    console.log(`Winner: ${winner}`);
-  }
+  
 }
 
-// Prompt to open the console
+// HTML Selectors
 
-alert("Please open Google Chrome, press F12 and keep your Console open for the intended experience.");
+let resultsDisplayer = document.querySelector(".results p");
+let scoreDisplayer = document.querySelector(".score p");
 
 // Score tracker
 
 let humanScore = 0;
 let computerScore = 0;
 
+// Makes clicking a button select that option for the user
+
+
+const buttons = document.querySelector(".container");
+buttons.addEventListener("click", (e) => {
+  humanChoice = e.target.id;
+  switch (humanChoice){
+    case "rock":
+      playRound("Necro", "Rock", getComputerChoice());
+      break;
+    case "paper":
+      playRound("Necro", "Paper", getComputerChoice());
+      break;
+    case "scissors":
+      playRound("Necro", "Scissors", getComputerChoice());
+      break;
+    }
+    if(humanScore >= 5 || computerScore >= 5) {
+      const winner = getsWinner("Human", humanScore, "Computer", computerScore);
+      resultsDisplayer.textContent = "GAME OVER";
+      if (winner === "tie") {
+        scoreDisplayer.textContent = "Game concluded in a tie";
+      } else {
+        scoreDisplayer.textContent = `Winner: ${winner}`;
+      }
+      buttons.style.pointerEvents = "none";
+    }
+});
+
+
 // Executes the code
 
-gameWrapper();
+// gameWrapper();

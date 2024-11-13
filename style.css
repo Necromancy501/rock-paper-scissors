@@ -1,0 +1,72 @@
+/* BODY */
+
+* {
+    /* border: 0.5px solid red; */
+    font-family: 'Verdana', 'Helvetica', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: stretch;
+    border: 6px solid black;
+    border-radius: 9px;
+    background-color: rgba(165, 222, 236, 0.836);
+}
+
+/* DISPLAY */
+
+.display {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0px 12px 8px
+}
+
+.results {
+    background-color: rgba(94, 255, 134, 0.637);
+}
+
+.score {
+    background-color: rgba(238, 188, 235, 0.637);
+}
+
+.display p {
+    text-align: center;
+    font-size: 32px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 20px;
+}
+
+div > button {
+    text-align: center;
+    border-radius: 5px;
+    padding: 4px 20px 4px 20px;
+    font-size: 27px;
+    font-weight: bolder;
+    box-shadow: 4px 4px 8px #1a357d;
+}
+
+#rock {
+    background-color: #363434;
+    color: #e5e1e6; 
+}
+
+#paper {
+    background-color: #c4c4c4;
+    color: black;
+}
+
+#scissors {
+    background-color: #6b6b6b;
+    color: #fafafa;
+}
